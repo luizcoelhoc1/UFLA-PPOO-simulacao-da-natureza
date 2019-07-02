@@ -53,4 +53,9 @@ public class Rabbit extends Animal {
         return new Rabbit(false);
     }
 
+    @Override
+    public void toLive(Field currentField, Field updatedField, List newAnimals) {
+        run(updatedField, newAnimals);
+    }
+
 }

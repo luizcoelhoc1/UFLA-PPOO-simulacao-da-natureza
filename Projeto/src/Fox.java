@@ -54,6 +54,7 @@ public class Fox extends Animal {
         }
         super.runTime(updatedField, newFoxes, newLocation);
     }
+    
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -93,6 +94,11 @@ public class Fox extends Animal {
     @Override
     public Animal newChild() {
         return new Fox(false);
+    }
+
+    @Override
+    public void toLive(Field currentField, Field updatedField, List newAnimals) {
+        hunt(currentField, updatedField, newAnimals);
     }
 
 }

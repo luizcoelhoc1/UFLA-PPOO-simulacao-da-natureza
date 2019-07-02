@@ -112,6 +112,9 @@ public abstract class Animal {
 
         }
     }
+    
+    
+    public abstract void toLive(Field currentField, Field updatedField, List newAnimals);
 
     public abstract Animal newChild();
 
