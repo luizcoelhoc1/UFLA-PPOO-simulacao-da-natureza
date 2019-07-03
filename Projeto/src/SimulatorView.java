@@ -20,42 +20,98 @@ public class SimulatorView extends JFrame {
 
     // Color used for objects that have no defined color.
     private static final Color UNKNOWN_COLOR = Color.gray;
-    
+
     private final String STEP_PREFIX = "Step: ";
     private final String POPULATION_PREFIX = "Population: ";
-    private JLabel stepLabel, population;
+    private JButton btnPause, btnContinue;
+    private JLabel stepLabel, population, runningStatus;
     private FieldView fieldView;
+    
 
     // A map for storing colors for participants in the simulation
     private HashMap colors;
     // A statistics object computing and storing simulation information
     private FieldStats stats;
 
+    private boolean paused;
+
     /**
      * Create a view of the given width and height.
      */
     public SimulatorView(int height, int width) {
+        paused = false;
+
         stats = new FieldStats();
         colors = new HashMap();
-        
+
         setTitle("Fox and Rabbit Simulation");
         stepLabel = new JLabel(STEP_PREFIX, JLabel.CENTER);
         population = new JLabel(POPULATION_PREFIX, JLabel.CENTER);
+
+        //btn continue instantiation
+        this.btnContinue = new JButton("Continue");
+        this.btnContinue.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                continueSimulate(ae);
+            }
+        });
+
+        //btn pause instantiation        
+        this.btnPause = new JButton("Pause");
+        this.btnPause.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pausedSimulate(ae);
+            }
+        });
+
+        this.runningStatus = new JLabel("Running");
         
         setLocation(100, 50);
-        
+
         fieldView = new FieldView(height, width);
-        
+
         Container contents = getContentPane();
         contents.add(stepLabel, BorderLayout.NORTH);
         contents.add(fieldView, BorderLayout.CENTER);
-        contents.add(population, BorderLayout.SOUTH);
+
+        //add population
+        JPanel jp = new JPanel(new GridLayout(3, 1));
+        jp.add(population);
+        
+        //add running status
+        JPanel running = (new JPanel(new FlowLayout()));
+        running.add(runningStatus);
+        jp.add(running);
+
+        //add buttons bellow label
+        JPanel jpButtons = new JPanel(new GridLayout(1, 2));
+        jpButtons.add(btnContinue);
+        jpButtons.add(btnPause);
+        jp.add(jpButtons);
+        contents.add(jp, BorderLayout.SOUTH);
+
         pack();
-        
+
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
         setVisible(true);
-        
+
+    }
+
+    private void pausedSimulate(java.awt.event.ActionEvent evt) {
+        this.paused = true;
+        this.runningStatus.setText("Paused");
+    }
+
+    private void continueSimulate(java.awt.event.ActionEvent evt) {
+        this.paused = false;
+        this.runningStatus.setText("Running");
+    }
+
+    public boolean isPaused() {
+        return paused;
     }
 
     /**
@@ -88,12 +144,12 @@ public class SimulatorView extends JFrame {
         if (!isVisible()) {
             setVisible(true);
         }
-        
+
         stepLabel.setText(STEP_PREFIX + step);
-        
+
         stats.reset();
         fieldView.preparePaint();
-        
+
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
                 Object animal = field.getObjectAt(row, col);
@@ -106,7 +162,7 @@ public class SimulatorView extends JFrame {
             }
         }
         stats.countFinished();
-        
+
         population.setText(POPULATION_PREFIX + stats.getPopulationDetails(field));
         fieldView.repaint();
     }
@@ -127,9 +183,9 @@ public class SimulatorView extends JFrame {
      * advanced GUI stuff - you can ignore this for your project if you like.
      */
     private class FieldView extends JPanel {
-        
+
         private final int GRID_VIEW_SCALING_FACTOR = 6;
-        
+
         private int gridWidth, gridHeight;
         private int xScale, yScale;
         Dimension size;
@@ -162,7 +218,7 @@ public class SimulatorView extends JFrame {
                 size = getSize();
                 fieldImage = fieldView.createImage(size.width, size.height);
                 g = fieldImage.getGraphics();
-                
+
                 xScale = size.width / gridWidth;
                 if (xScale < 1) {
                     xScale = GRID_VIEW_SCALING_FACTOR;

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Collections;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A simple predator-prey simulator, based on a field containing rabbits and
@@ -93,6 +95,24 @@ public class Simulator {
     }
 
     /**
+     * Run the simulation from its current state for the given number of steps.
+     * Stop before the given number of steps if it ceases to be viable.
+     */
+    public void simulate() {
+        while (true) {
+            try {
+                if (!view.isPaused()) {
+                    simulateOneStep();
+                }
+
+                java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    /**
      * Run the simulation from its current state for a single step. Iterate over
      * the whole field updating the state of each fox and rabbit.
      */
@@ -124,6 +144,7 @@ public class Simulator {
 
         // display the new field on screen
         view.showStatus(step, field);
+
     }
 
     /**
