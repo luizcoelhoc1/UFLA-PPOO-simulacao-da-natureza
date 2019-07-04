@@ -26,7 +26,6 @@ public class SimulatorView extends JFrame {
     private JButton btnPause, btnContinue;
     private JLabel stepLabel, population, runningStatus;
     private FieldView fieldView;
-    
 
     // A map for storing colors for participants in the simulation
     private HashMap colors;
@@ -67,7 +66,7 @@ public class SimulatorView extends JFrame {
         });
 
         this.runningStatus = new JLabel("Running");
-        
+
         setLocation(100, 50);
 
         fieldView = new FieldView(height, width);
@@ -79,7 +78,7 @@ public class SimulatorView extends JFrame {
         //add population
         JPanel jp = new JPanel(new GridLayout(3, 1));
         jp.add(population);
-        
+
         //add running status
         JPanel running = (new JPanel(new FlowLayout()));
         running.add(runningStatus);
@@ -124,12 +123,21 @@ public class SimulatorView extends JFrame {
     /**
      * Define a color to be used for a given class of animal.
      */
-    private Color getColor(Class animalClass) {
+    private Color getColor(Animal animal) {
+        Class animalClass = animal.getClass();
         Color col = (Color) colors.get(animalClass);
+
         if (col == null) {
             // no color defined for this class
             return UNKNOWN_COLOR;
         } else {
+            if (animal.getSex() == Sex.MASCULINO) {
+                                
+                Double red = col.getRed() * 0.5;
+                Double green = col.getGreen() * 0.5;
+                Double blue = col.getBlue() * 0.5;
+                col = new Color(red.intValue(), green.intValue(), blue.intValue());
+            }
             return col;
         }
     }
@@ -152,10 +160,10 @@ public class SimulatorView extends JFrame {
 
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
-                Object animal = field.getObjectAt(row, col);
+                Animal animal = field.getObjectAt(row, col);
                 if (animal != null) {
                     stats.incrementCount(animal.getClass());
-                    fieldView.drawMark(col, row, getColor(animal.getClass()));
+                    fieldView.drawMark(col, row, getColor(animal));
                 } else {
                     fieldView.drawMark(col, row, EMPTY_COLOR);
                 }

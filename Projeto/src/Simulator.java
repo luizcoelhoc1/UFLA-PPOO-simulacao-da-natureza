@@ -104,8 +104,7 @@ public class Simulator {
                 if (!view.isPaused()) {
                     simulateOneStep();
                 }
-
-                java.util.concurrent.TimeUnit.SECONDS.sleep(2);
+                java.util.concurrent.TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException ex) {
                 Logger.getLogger(Simulator.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -135,6 +134,7 @@ public class Simulator {
         }
         // add new born animals to the list of animals
         animals.addAll(newAnimals);
+        System.out.println(newAnimals);
 
         // Swap the field and updatedField at the end of the step.
         Field temp = field;
@@ -170,12 +170,12 @@ public class Simulator {
         for (int row = 0; row < field.getDepth(); row++) {
             for (int col = 0; col < field.getWidth(); col++) {
                 if (rand.nextDouble() <= FOX_CREATION_PROBABILITY) {
-                    Fox fox = new Fox(true);
+                    Fox fox = new Fox();
                     animals.add(fox);
                     fox.setLocation(row, col);
                     field.place(fox, row, col);
                 } else if (rand.nextDouble() <= RABBIT_CREATION_PROBABILITY) {
-                    Rabbit rabbit = new Rabbit(true);
+                    Rabbit rabbit = new Rabbit();
                     animals.add(rabbit);
                     rabbit.setLocation(row, col);
                     field.place(rabbit, row, col);

@@ -5,5 +5,7 @@ public class Principal {
         Simulator simulator = new Simulator();
         simulator.simulate();
 
+        
+        
     }
 }

@@ -35,9 +35,24 @@ public class Fox extends Animal {
      *
      * @param randomAge If true, the fox will have random age and hunger level.
      */
-    public Fox(boolean randomAge) {
-        super(randomAge, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
-        this.foodLevel = randomAge ? rand.nextInt(RABBIT_FOOD_VALUE) : RABBIT_FOOD_VALUE;
+    public Fox() {
+        super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        this.foodLevel = RABBIT_FOOD_VALUE;
+    }
+
+    public Fox(int age) {
+        super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        this.foodLevel = RABBIT_FOOD_VALUE;
+    }
+
+    public Fox(Sex sex) {
+        super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        this.foodLevel = RABBIT_FOOD_VALUE;
+    }
+
+    public Fox(Sex sex, int age) {
+        super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        this.foodLevel = RABBIT_FOOD_VALUE;
     }
 
     /**
@@ -52,9 +67,8 @@ public class Fox extends Animal {
         if (newLocation == null) {  // no food found - move randomly
             newLocation = updatedField.freeAdjacentLocation(getLocation());
         }
-        super.runTime(updatedField, newFoxes, newLocation);
+        super.runTime(currentField, updatedField, newFoxes, newLocation);
     }
-    
 
     /**
      * Make this fox more hungry. This could result in the fox's death.
@@ -93,7 +107,7 @@ public class Fox extends Animal {
 
     @Override
     public Animal newChild() {
-        return new Fox(false);
+        return new Fox(0);
     }
 
     @Override

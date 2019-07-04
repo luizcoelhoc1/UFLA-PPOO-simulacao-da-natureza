@@ -28,17 +28,29 @@ public class Rabbit extends Animal {
      *
      * @param randomAge If true, the rabbit will have a random age.
      */
-    public Rabbit(boolean randomAge) {
-        super(randomAge, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+    public Rabbit() {
+        super(randomAge(MAX_AGE), Sex.MASCULINO, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+    }
+
+    public Rabbit(int age) {
+        super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+    }
+
+    public Rabbit(Sex sex) {
+        super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+    }
+
+    public Rabbit(Sex sex, int age) {
+        super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
     }
 
     /**
      * This is what the rabbit does most of the time - it runs around. Sometimes
      * it will breed or die of old age.
      */
-    public void run(Field updatedField, List newRabbits) {
+    public void run(Field currentField, Field updatedField, List newRabbits) {
         Location newLocation = updatedField.freeAdjacentLocation(getLocation());
-        super.runTime(updatedField, newRabbits, newLocation);
+        super.runTime(currentField, updatedField, newRabbits, newLocation);
     }
 
     /**
@@ -50,12 +62,12 @@ public class Rabbit extends Animal {
 
     @Override
     public Animal newChild() {
-        return new Rabbit(false);
+        return new Rabbit(0);
     }
 
     @Override
     public void toLive(Field currentField, Field updatedField, List newAnimals) {
-        run(updatedField, newAnimals);
+        run(currentField, updatedField, newAnimals);
     }
 
 }
