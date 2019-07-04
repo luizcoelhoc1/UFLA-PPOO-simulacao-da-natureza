@@ -19,8 +19,10 @@ public class Rabbit extends Animal {
     private static final double BREEDING_PROBABILITY = 0.15;
     // The maximum number of births.
     private static final int MAX_LITTER_SIZE = 5;
-    // A shared random number generator to control breeding.
-    private static final Random rand = new Random();
+    // The Rabbit food value
+    private static final int FOOD_VALUE = 15;
+
+    public static final String SPECIES = "Oryctolagus cuniculus";
 
     /**
      * Create a new rabbit. A rabbit may be created with age zero (a new born)
@@ -29,35 +31,19 @@ public class Rabbit extends Animal {
      * @param randomAge If true, the rabbit will have a random age.
      */
     public Rabbit() {
-        super(randomAge(MAX_AGE), Sex.MASCULINO, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     public Rabbit(int age) {
-        super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     public Rabbit(Sex sex) {
-        super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
+        super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     public Rabbit(Sex sex, int age) {
-        super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY);
-    }
-
-    /**
-     * This is what the rabbit does most of the time - it runs around. Sometimes
-     * it will breed or die of old age.
-     */
-    public void run(Field currentField, Field updatedField, List newRabbits) {
-        Location newLocation = updatedField.freeAdjacentLocation(getLocation());
-        super.runTime(currentField, updatedField, newRabbits, newLocation);
-    }
-
-    /**
-     * Tell the rabbit that it's dead now :(
-     */
-    public void setEaten() {
-        die();
+        super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     @Override
@@ -65,9 +51,23 @@ public class Rabbit extends Animal {
         return new Rabbit(0);
     }
 
+    /**
+     * This is what the rabbit does most of the time - it runs around. Sometimes
+     * it will breed or die of old age.
+     */
     @Override
     public void toLive(Field currentField, Field updatedField, List newAnimals) {
-        run(currentField, updatedField, newAnimals);
+        Location newLocation = updatedField.freeAdjacentLocation(getLocation());
+        super.runTime(currentField, updatedField, newAnimals, newLocation);
+    }
+
+    @Override
+    public String getSpecies() {
+        return SPECIES;
+    }
+
+    @Override
+    public void setEdibleAnimals() {
     }
 
 }

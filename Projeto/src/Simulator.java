@@ -27,6 +27,8 @@ public class Simulator {
     private static final double FOX_CREATION_PROBABILITY = 0.02;
     // The probability that a rabbit will be created in any given grid position.
     private static final double RABBIT_CREATION_PROBABILITY = 0.08;
+    // The probability that a rabbit will be created in any given grid position.
+    private static final double COYOTE_CREATION_PROBABILITY = 0.01;
 
     // The list of animals in the field
     private List animals;
@@ -55,7 +57,6 @@ public class Simulator {
      * @param width Width of the field. Must be greater than zero.
      */
     public Simulator(int depth, int width) {
-        System.out.println(Fox.class);
         if (width <= 0 || depth <= 0) {
             System.out.println("The dimensions must be greater than zero.");
             System.out.println("Using default values.");
@@ -70,7 +71,8 @@ public class Simulator {
         // Create a view of the state of each location in the field.
         view = new SimulatorView(depth, width);
         view.setColor(Fox.class, Color.blue);
-        view.setColor(Rabbit.class, Color.orange);
+        view.setColor(Rabbit.class, Color.yellow);
+        view.setColor(Coyote.class, Color.red);
 
         // Setup a valid starting point.
         reset();
@@ -179,6 +181,11 @@ public class Simulator {
                     animals.add(rabbit);
                     rabbit.setLocation(row, col);
                     field.place(rabbit, row, col);
+                } else if (rand.nextDouble() <= COYOTE_CREATION_PROBABILITY) {
+                    Coyote coyote = new Coyote();
+                    animals.add(coyote);
+                    coyote.setLocation(row, col);
+                    field.place(coyote, row, col);
                 }
                 // else leave the location empty.
             }

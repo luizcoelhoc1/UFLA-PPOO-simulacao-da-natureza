@@ -32,9 +32,15 @@ public abstract class Animal {
 
     private double breedingProbability;
 
+    private int foodValue;
+
+    private ArrayList<String> preys;
+
+    private int foodSatiety;
+
     private static final Random rand = new Random();
 
-    public Animal(int age, Sex sex, int maxAge, int breedingAge, int maxLitterSize, double breedingProbability) {
+    public Animal(int age, Sex sex, int maxAge, int breedingAge, int maxLitterSize, double breedingProbability, int foodValue, int foodSatiety) {
         this.breedingProbability = breedingProbability;
         this.maxLitterSize = maxLitterSize;
         this.breedingAge = breedingAge;
@@ -42,13 +48,30 @@ public abstract class Animal {
         this.age = age;
         this.sex = sex;
         this.alive = true;
+        this.foodValue = foodValue;
+        this.preys = new ArrayList<>();
+        this.foodSatiety = foodSatiety;
     }
 
-    protected void incrementAge() {
+    /**
+     * Make this fox more hungry. This could result in the fox's death.
+     */
+    protected void incrementHunger() {
+        foodSatiety--;
+        if (foodSatiety <= 0) {
+            die();
+        }
+    }
+
+    private void incrementAge() {
         age++;
         if (age > maxAge) {
             die();
         }
+    }
+
+    public void addPrey(String prey) {
+        this.preys.add(prey);
     }
 
     /**
@@ -76,8 +99,23 @@ public abstract class Animal {
     /**
      * A rabbit can breed if it has reached the breeding age.
      */
-    protected boolean canBreed() {
-        return age >= breedingAge;
+    private boolean canBreed(Field currentField, Field updatedField) {
+        boolean nearItsSimilar = false;
+        Iterator adjacentLocations
+                = currentField.adjacentLocations(location);
+        while (adjacentLocations.hasNext()) {
+            Location where = (Location) adjacentLocations.next();
+            Animal animal = currentField.getObjectAt(where);
+            if (animal != null) {
+                if (this.getSpecies() == animal.getSpecies()) {
+                    if (this.sex != animal.getSex()) {
+                        nearItsSimilar = true;
+                    }
+                }
+            }
+
+        }
+        return age >= breedingAge && nearItsSimilar;
     }
 
     /**
@@ -85,25 +123,12 @@ public abstract class Animal {
      *
      * @return The number of births (may be zero).
      */
-    protected List breed(Field currentField, Field updatedField) {
-
-        Iterator adjacentLocations
-                = currentField.adjacentLocations(location);
-        while (adjacentLocations.hasNext()) {
-            Location where = (Location) adjacentLocations.next();
-            Animal animal = currentField.getObjectAt(where);
-            if (this instanceof Fox && animal instanceof Fox) {
-            }
-            
-        }
-
+    private List breed(Field currentField, Field updatedField, List newAnimals) {
         int births = 0;
-        System.out.println(breedingProbability);
-        if (canBreed() && rand.nextDouble() <= breedingProbability) {
+        if (canBreed(currentField, updatedField) && rand.nextDouble() <= breedingProbability) {
             births = rand.nextInt(maxLitterSize) + 1;
         }
 
-        List newAnimals = new ArrayList();
         for (int b = 0; b < births; b++) {
             Animal newAnimal = newChild();
             newAnimals.add(newAnimal);
@@ -119,10 +144,7 @@ public abstract class Animal {
         incrementAge();
         if (isAlive()) {
             //newAnimals
-            List<Animal> childs = breed(currentField, updatedField);
-            for (Animal a : childs) {
-                newAnimals.add(a);
-            }
+            breed(currentField, updatedField, newAnimals);
 
             if (newLocation != null) {
                 setLocation(newLocation);
@@ -136,6 +158,8 @@ public abstract class Animal {
     }
 
     public abstract void toLive(Field currentField, Field updatedField, List newAnimals);
+
+    public abstract String getSpecies();
 
     public abstract Animal newChild();
 
@@ -157,5 +181,47 @@ public abstract class Animal {
 
     public Sex getSex() {
         return sex;
+    }
+
+    public int getFoodValue() {
+        return this.foodValue;
+    }
+
+    public abstract void setEdibleAnimals();
+
+    /**
+     * Tell the rabbit that it's dead now :(
+     */
+    public void setEaten() {
+        die();
+    }
+
+    /**
+     * Tell the fox to look for rabbits adjacent to its current location.
+     *
+     * @param field The field in which it must look.
+     * @param location Where in the field it is located.
+     * @return Where food was found, or null if it wasn't.
+     */
+    protected Location findFood(Field field, Location location) {
+        Iterator adjacentLocations
+                = field.adjacentLocations(location);
+        while (adjacentLocations.hasNext()) {
+            Location where = (Location) adjacentLocations.next();
+            Animal animal = field.getObjectAt(where);
+            if (animal instanceof Animal) {
+                for (String s : preys) {
+                    if (s.equals(animal.getSpecies())) {
+                        if (animal.isAlive()) {
+                            animal.setEaten();
+                            foodSatiety += animal.getFoodValue();
+                            return where;
+                        }
+                    }
+                }
+
+            }
+        }
+        return null;
     }
 }

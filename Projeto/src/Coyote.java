@@ -1,17 +1,18 @@
 
 import java.util.List;
-import java.util.Iterator;
-import java.util.Random;
 
-/**
- * A simple model of a fox. Foxes age, move, eat rabbits, and die.
- *
- * @author David J. Barnes and Michael Kolling
- * @version 2002-04-11
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-public class Fox extends Animal {
-    // Characteristics shared by all foxes (static fields).
+/**
+ *
+ * @author aluno
+ */
+public class Coyote extends Animal {
 
+    // Characteristics shared by all foxes (static fields).
     // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 10;
     // The age to which a fox can live.
@@ -25,7 +26,7 @@ public class Fox extends Animal {
     // The fox food value
     private static final int FOOD_VALUE = 15;
     
-    public static final String SPECIES = "Vulpes vulpes";
+    public static final String SPECIES = "Canis latrans";
 
     /**
      * Create a fox. A fox can be created as a new born (age zero and not
@@ -33,22 +34,22 @@ public class Fox extends Animal {
      *
      * @param randomAge If true, the fox will have random age and hunger level.
      */
-    public Fox() {
+    public Coyote() {
         super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
         constructor();
     }
 
-    public Fox(int age) {
+    public Coyote(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
         constructor();
     }
 
-    public Fox(Sex sex) {
+    public Coyote(Sex sex) {
         super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
         constructor();
     }
 
-    public Fox(Sex sex, int age) {
+    public Coyote(Sex sex, int age) {
         super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
         constructor();
     }
@@ -60,6 +61,7 @@ public class Fox extends Animal {
     @Override
     public void setEdibleAnimals() {
         addPrey(Rabbit.SPECIES);
+        addPrey(Fox.SPECIES);
     }
 
     @Override
@@ -85,7 +87,7 @@ public class Fox extends Animal {
 
     @Override
     public String getSpecies() {
-        return SPECIES;
+        return "Vulpes vulpes";
     }
 
 }
