@@ -139,7 +139,7 @@ public class SimulatorView extends JFrame {
             // no color defined for this class
             return UNKNOWN_COLOR;
         } else {
-            if (animal.getSex() == Sex.MASCULINO) {
+            if (animal.getSex() == Sex.MALE) {
                                 
                 Double red = col.getRed() * 0.5;
                 Double green = col.getGreen() * 0.5;
