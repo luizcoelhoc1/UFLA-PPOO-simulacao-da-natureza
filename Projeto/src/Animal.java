@@ -40,6 +40,17 @@ public abstract class Animal {
 
     private static final Random rand = new Random();
 
+    /**
+     *
+     * @param age
+     * @param sex
+     * @param maxAge
+     * @param breedingAge
+     * @param maxLitterSize
+     * @param breedingProbability
+     * @param foodValue
+     * @param foodSatiety
+     */
     public Animal(int age, Sex sex, int maxAge, int breedingAge, int maxLitterSize, double breedingProbability, int foodValue, int foodSatiety) {
         this.breedingProbability = breedingProbability;
         this.maxLitterSize = maxLitterSize;
@@ -70,6 +81,10 @@ public abstract class Animal {
         }
     }
 
+    /**
+     *
+     * @param prey
+     */
     public void addPrey(String prey) {
         this.preys.add(prey);
     }
@@ -83,6 +98,11 @@ public abstract class Animal {
         return alive;
     }
 
+    /**
+     *
+     * @param row
+     * @param col
+     */
     public void setLocation(int row, int col) {
         this.location = new Location(row, col);
     }
@@ -140,6 +160,13 @@ public abstract class Animal {
         return newAnimals;
     }
 
+    /**
+     *
+     * @param currentField
+     * @param updatedField
+     * @param newAnimals
+     * @param newLocation
+     */
     protected void runTime(Field currentField, Field updatedField, List newAnimals, Location newLocation) {
         incrementAge();
         if (isAlive()) {
@@ -157,36 +184,77 @@ public abstract class Animal {
         }
     }
 
+    /**
+     *
+     * @param currentField
+     * @param updatedField
+     * @param newAnimals
+     */
     public abstract void toLive(Field currentField, Field updatedField, List newAnimals);
 
+    /**
+     *
+     * @return
+     */
     public abstract String getSpecies();
 
+    /**
+     *
+     * @return
+     */
     public abstract Animal newChild();
 
+    /**
+     *
+     */
     public void die() {
         alive = false;
     }
 
+    /**
+     *
+     * @return
+     */
     public Location getLocation() {
         return location;
     }
 
+    /**
+     *
+     * @param maxAge
+     * @return
+     */
     public static int randomAge(int maxAge) {
         return rand.nextInt(maxAge);
     }
 
+    /**
+     *
+     * @return
+     */
     public static Sex randomSex() {
         return rand.nextInt(100) < 50 ? Sex.MASCULINO : Sex.FEMININO;
     }
 
+    /**
+     *
+     * @return
+     */
     public Sex getSex() {
         return sex;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getFoodValue() {
         return this.foodValue;
     }
 
+    /**
+     *
+     */
     public abstract void setEdibleAnimals();
 
     /**

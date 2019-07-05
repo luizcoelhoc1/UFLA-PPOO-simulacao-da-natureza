@@ -9,5 +9,19 @@
  * @author aluno
  */
 public enum Sex {
-    MASCULINO, FEMININO, HERMAFRODITA
+
+    /**
+     *
+     */
+    MASCULINO,
+
+    /**
+     *
+     */
+    FEMININO,
+
+    /**
+     *
+     */
+    HERMAFRODITA
 }

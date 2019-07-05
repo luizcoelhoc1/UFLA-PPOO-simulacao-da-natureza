@@ -36,6 +36,8 @@ public class SimulatorView extends JFrame {
 
     /**
      * Create a view of the given width and height.
+     * @param height
+     * @param width
      */
     public SimulatorView(int height, int width) {
         paused = false;
@@ -109,12 +111,18 @@ public class SimulatorView extends JFrame {
         this.runningStatus.setText("Running");
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isPaused() {
         return paused;
     }
 
     /**
      * Define a color to be used for a given class of animal.
+     * @param animalClass
+     * @param color
      */
     public void setColor(Class animalClass, Color color) {
         colors.put(animalClass, color);
@@ -145,8 +153,8 @@ public class SimulatorView extends JFrame {
     /**
      * Show the current status of the field.
      *
-     * @param step Which iteration step it is.
      * @param stats Status of the field to be represented.
+     * @param field
      */
     public void showStatus(int step, Field field) {
         if (!isVisible()) {
@@ -178,6 +186,7 @@ public class SimulatorView extends JFrame {
     /**
      * Determine whether the simulation should continue to run.
      *
+     * @param field
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field) {

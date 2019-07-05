@@ -22,6 +22,9 @@ public class Rabbit extends Animal {
     // The Rabbit food value
     private static final int FOOD_VALUE = 15;
 
+    /**
+     *
+     */
     public static final String SPECIES = "Oryctolagus cuniculus";
 
     /**
@@ -34,18 +37,35 @@ public class Rabbit extends Animal {
         super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
+    /**
+     *
+     * @param age
+     */
     public Rabbit(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
+    /**
+     *
+     * @param sex
+     */
     public Rabbit(Sex sex) {
         super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
+    /**
+     *
+     * @param sex
+     * @param age
+     */
     public Rabbit(Sex sex, int age) {
         super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public Animal newChild() {
         return new Rabbit(0);
@@ -54,6 +74,9 @@ public class Rabbit extends Animal {
     /**
      * This is what the rabbit does most of the time - it runs around. Sometimes
      * it will breed or die of old age.
+     * @param currentField
+     * @param updatedField
+     * @param newAnimals
      */
     @Override
     public void toLive(Field currentField, Field updatedField, List newAnimals) {
@@ -61,11 +84,18 @@ public class Rabbit extends Animal {
         super.runTime(currentField, updatedField, newAnimals, newLocation);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String getSpecies() {
         return SPECIES;
     }
 
+    /**
+     *
+     */
     @Override
     public void setEdibleAnimals() {
     }

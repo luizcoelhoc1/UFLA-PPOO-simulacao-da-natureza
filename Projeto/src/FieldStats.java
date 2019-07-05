@@ -29,6 +29,7 @@ public class FieldStats {
     }
 
     /**
+     * @param field
      * @return A string describing what animals are in the field.
      */
     public String getPopulationDetails(Field field) {
@@ -61,6 +62,7 @@ public class FieldStats {
 
     /**
      * Increment the count for one class of animal.
+     * @param animalClass
      */
     public void incrementCount(Class animalClass) {
         Counter cnt = (Counter) counters.get(animalClass);
@@ -83,6 +85,7 @@ public class FieldStats {
      * Determine whether the simulation is still viable. I.e., should it
      * continue to run.
      *
+     * @param field
      * @return true If there is more than one species alive.
      */
     public boolean isViable(Field field) {

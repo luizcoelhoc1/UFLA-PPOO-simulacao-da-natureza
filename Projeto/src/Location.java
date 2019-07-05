@@ -24,6 +24,8 @@ public class Location {
 
     /**
      * Implement content equality.
+     * @param obj
+     * @return 
      */
     public boolean equals(Object obj) {
         if (obj instanceof Location) {
@@ -47,6 +49,7 @@ public class Location {
      * Use the top 16 bits for the row value and the bottom for the column.
      * Except for very big grids, this should give a unique hash code for each
      * (row, col) pair.
+     * @return 
      */
     public int hashCode() {
         return (row << 16) + col;
