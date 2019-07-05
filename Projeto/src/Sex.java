@@ -7,15 +7,15 @@ public enum Sex {
     /**
      * Male
      */
-    MASCULINO,
+    MALE,
 
     /**
      * Female
      */
-    FEMININO,
+    FEMALE,
 
     /**
      * Hermaphrodite
      */
-    HERMAFRODITA
+    HERMAPHRODITE
 }

@@ -228,7 +228,7 @@ public abstract class Animal {
      * @return enum defining the sex
      */
     public static Sex randomSex() {
-        return rand.nextInt(100) < 50 ? Sex.MASCULINO : Sex.FEMININO;
+        return rand.nextInt(100) < 50 ? Sex.MALE : Sex.FEMALE;
     }
 
     /**
