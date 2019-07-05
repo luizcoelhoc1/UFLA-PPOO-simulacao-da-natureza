@@ -33,7 +33,7 @@ public class Coyote extends Animal {
 
     /**
      * Creates a coyote with defined age and random sex
-     * @param age The age of the Rabbit
+     * @param age The age of the coyote
      */
     public Coyote(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -41,18 +41,18 @@ public class Coyote extends Animal {
     }
 
     /**
-     *
-     * @param sex
+     * Creates a Coyote with random age and defined sex
+     * @param sex The sex of the Coyote
      */
     public Coyote(Sex sex) {
         super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
         constructor();
     }
 
-    /**
-     *
-     * @param sex
-     * @param age
+     /**
+     * Creates a Coyote with pre-defined age and sex
+     * @param sex The sex of the Coyote
+     * @param age The age of the Coyote
      */
     public Coyote(Sex sex, int age) {
         super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -60,14 +60,14 @@ public class Coyote extends Animal {
     }
 
     /**
-     *
+     * Auxiliary function to the constructor
      */
     public void constructor() {
         setEdibleAnimals();
     }
 
-    /**
-     *
+     /**
+     * Defines what animals can be edible by the coyote
      */
     @Override
     public void setEdibleAnimals() {
@@ -76,8 +76,8 @@ public class Coyote extends Animal {
     }
 
     /**
-     *
-     * @return
+     * Creates a new coyote born from this one
+     * @return The new coyote born
      */
     @Override
     public Animal newChild() {
@@ -104,12 +104,12 @@ public class Coyote extends Animal {
     }
 
     /**
-     *
-     * @return
+     * Return the scientific name of the coyote in a string format
+     * @return String containing the scientific name of the coyote
      */
     @Override
     public String getSpecies() {
-        return "Vulpes vulpes";
+        return SPECIES;
     }
 
 }
