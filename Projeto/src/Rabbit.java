@@ -9,7 +9,6 @@ import java.util.Random;
  * @version 2002-04-11
  */
 public class Rabbit extends Animal {
-    // Characteristics shared by all rabbits (static fields).
 
     // The age at which a rabbit can start to breed.
     private static final int BREEDING_AGE = 5;
@@ -23,48 +22,45 @@ public class Rabbit extends Animal {
     private static final int FOOD_VALUE = 15;
 
     /**
-     *
+     * The scientific name of the species
      */
     public static final String SPECIES = "Oryctolagus cuniculus";
 
     /**
-     * Create a new rabbit. A rabbit may be created with age zero (a new born)
-     * or with a random age.
-     *
-     * @param randomAge If true, the rabbit will have a random age.
+     * Create a new rabbit. Both age and sex will be set to random
      */
     public Rabbit() {
         super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     /**
-     *
-     * @param age
+     * Creates a Rabbit with defined age and random sex
+     * @param age The age of the Rabbit
      */
     public Rabbit(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     /**
-     *
-     * @param sex
+     * Creates a Rabbit with random age and defined sex
+     * @param sex The sex of the Rabbit
      */
     public Rabbit(Sex sex) {
         super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     /**
-     *
-     * @param sex
-     * @param age
+     * Creates a Rabbit with pre-defined age and sex
+     * @param sex The sex of the Rabbit
+     * @param age The age of the Rabbit
      */
     public Rabbit(Sex sex, int age) {
         super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, 10000);
     }
 
     /**
-     *
-     * @return
+     * Creates a new rabbit born from this one
+     * @return The new rabbit born
      */
     @Override
     public Animal newChild() {
@@ -85,8 +81,8 @@ public class Rabbit extends Animal {
     }
 
     /**
-     *
-     * @return
+     * Return the scientific name of the rabbit in a string format
+     * @return String containing the scientific name of the rabbit
      */
     @Override
     public String getSpecies() {
@@ -94,7 +90,7 @@ public class Rabbit extends Animal {
     }
 
     /**
-     *
+     * Set what animals can be eaten by the rabbit. It eats nothing.
      */
     @Override
     public void setEdibleAnimals() {

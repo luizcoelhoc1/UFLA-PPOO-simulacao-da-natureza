@@ -113,7 +113,7 @@ public class SimulatorView extends JFrame {
 
     /**
      *
-     * @return
+     * @return True if the simulation is paused
      */
     public boolean isPaused() {
         return paused;

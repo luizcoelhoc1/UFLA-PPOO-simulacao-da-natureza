@@ -4,14 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
- *
- * @author aluno
+ * Creates a new animal
+ * @author Luiz Carlos, Gustavo Rodrigues, Gabriel Henrique
  */
 public abstract class Animal {
 
@@ -42,14 +37,14 @@ public abstract class Animal {
 
     /**
      *
-     * @param age
-     * @param sex
-     * @param maxAge
-     * @param breedingAge
-     * @param maxLitterSize
-     * @param breedingProbability
-     * @param foodValue
-     * @param foodSatiety
+     * @param age the age of the animal
+     * @param sex the sex of the animal
+     * @param maxAge the maximum age that the animal will be able to live (in steps)
+     * @param breedingAge the minimum age required for the animal to breed
+     * @param maxLitterSize the maximum size of the litter this animal can produce
+     * @param breedingProbability the probability of a new animal be born (in decimals)
+     * @param foodValue the nutritious value of this animal (will increase saciety by that amount if eaten)
+     * @param foodSatiety the saciety of the animal (can be increased by eating others animals)
      */
     public Animal(int age, Sex sex, int maxAge, int breedingAge, int maxLitterSize, double breedingProbability, int foodValue, int foodSatiety) {
         this.breedingProbability = breedingProbability;
@@ -82,8 +77,8 @@ public abstract class Animal {
     }
 
     /**
-     *
-     * @param prey
+     * Add a prey to the preys list of the animal, the prey can be eaten by this animal
+     * @param prey an String naming the animal species that will be prey
      */
     public void addPrey(String prey) {
         this.preys.add(prey);
@@ -99,25 +94,25 @@ public abstract class Animal {
     }
 
     /**
-     *
-     * @param row
-     * @param col
+     * Defines a new location to the animal (like a movement)
+     * @param row row coordinate
+     * @param col column coordinate
      */
     public void setLocation(int row, int col) {
         this.location = new Location(row, col);
     }
 
     /**
-     * Set the fox's location.
-     *
-     * @param location The fox's location.
+     * Set the animal's location.
+     * @param location The animal's new location.
      */
     public void setLocation(Location location) {
         this.location = location;
     }
 
     /**
-     * A rabbit can breed if it has reached the breeding age.
+     * An animal can breed if it has reached the breeding age.
+	 * @return True if the animal can breed
      */
     private boolean canBreed(Field currentField, Field updatedField) {
         boolean nearItsSimilar = false;
@@ -161,7 +156,7 @@ public abstract class Animal {
     }
 
     /**
-     *
+     * Pass the time
      * @param currentField
      * @param updatedField
      * @param newAnimals
@@ -194,78 +189,78 @@ public abstract class Animal {
 
     /**
      *
-     * @return
+     * @return the name of the species
      */
     public abstract String getSpecies();
 
     /**
      *
-     * @return
+     * @return a new child born from this animal
      */
     public abstract Animal newChild();
 
     /**
-     *
+     * Just dies
      */
     public void die() {
         alive = false;
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return the location in which the animal are standing
      */
     public Location getLocation() {
         return location;
     }
 
     /**
-     *
-     * @param maxAge
-     * @return
+     * Generates a random age lesser than the maximum age
+     * @param maxAge Maximum age possible
+     * @return An integer representing the age
      */
     public static int randomAge(int maxAge) {
         return rand.nextInt(maxAge);
     }
 
     /**
-     *
-     * @return
+     * Generates a random sex
+     * @return enum defining the sex
      */
     public static Sex randomSex() {
         return rand.nextInt(100) < 50 ? Sex.MASCULINO : Sex.FEMININO;
     }
 
     /**
-     *
-     * @return
+     * Get the sex of the animal
+     * @return The animal's sex
      */
     public Sex getSex() {
         return sex;
     }
 
     /**
-     *
-     * @return
+     * Get nutritious value of the animal, if eaten by someone
+     * @return The nutritious value of the animal
      */
     public int getFoodValue() {
         return this.foodValue;
     }
 
     /**
-     *
+     * Set what animals can be eaten
      */
     public abstract void setEdibleAnimals();
 
     /**
-     * Tell the rabbit that it's dead now :(
+     * Tell the animal that it's dead now :(
      */
     public void setEaten() {
         die();
     }
 
     /**
-     * Tell the fox to look for rabbits adjacent to its current location.
+     * Tell the animal to look for rabbits adjacent to its current location.
      *
      * @param field The field in which it must look.
      * @param location Where in the field it is located.

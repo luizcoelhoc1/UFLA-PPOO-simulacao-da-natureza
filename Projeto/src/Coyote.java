@@ -1,41 +1,30 @@
-
 import java.util.List;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author aluno
+ * @author Luiz Carlos, Gustavo Rodrigues, Gabriel Henrique
  */
 public class Coyote extends Animal {
 
-    // Characteristics shared by all foxes (static fields).
-    // The age at which a fox can start to breed.
     private static final int BREEDING_AGE = 10;
-    // The age to which a fox can live.
+
     private static final int MAX_AGE = 150;
-    // The likelihood of a fox breeding.
+
     private static final double BREEDING_PROBABILITY = 0.09;
-    // The maximum number of births.
+
     private static final int MAX_LITTER_SIZE = 3;
-    // The maximum satiety level
+
     private static final int FULL_LEVEL = 15;
-    // The fox food value
+
     private static final int FOOD_VALUE = 15;
     
     /**
-     *
+     * The scientific name of the species
      */
     public static final String SPECIES = "Canis latrans";
 
     /**
-     * Create a fox. A fox can be created as a new born (age zero and not
-     * hungry) or with random age.
-     *
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * Create a new coyote. Both age and sex will be set to random
      */
     public Coyote() {
         super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -43,8 +32,8 @@ public class Coyote extends Animal {
     }
 
     /**
-     *
-     * @param age
+     * Creates a coyote with defined age and random sex
+     * @param age The age of the Rabbit
      */
     public Coyote(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);

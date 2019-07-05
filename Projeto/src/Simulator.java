@@ -89,7 +89,7 @@ public class Simulator {
     /**
      * Run the simulation from its current state for the given number of steps.
      * Stop before the given number of steps if it ceases to be viable.
-     * @param numSteps
+     * @param numSteps Number of steps
      */
     public void simulate(int numSteps) {
         for (int step = 1; step <= numSteps && view.isViable(field); step++) {
@@ -98,8 +98,7 @@ public class Simulator {
     }
 
     /**
-     * Run the simulation from its current state for the given number of steps.
-     * Stop before the given number of steps if it ceases to be viable.
+     * Run the simulation indeterminately from its current state with a time between each state
      */
     public void simulate() {
         while (true) {
@@ -116,7 +115,7 @@ public class Simulator {
 
     /**
      * Run the simulation from its current state for a single step. Iterate over
-     * the whole field updating the state of each fox and rabbit.
+     * the whole field updating the state of animal.
      */
     public void simulateOneStep() {
         step++;
@@ -165,7 +164,7 @@ public class Simulator {
     }
 
     /**
-     * Populate the field with foxes and rabbits.
+     * Populate the field animals (currently foxes, rabbits and coyotes).
      */
     private void populate(Field field) {
         Random rand = new Random();

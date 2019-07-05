@@ -26,7 +26,7 @@ public class Fox extends Animal {
     private static final int FOOD_VALUE = 15;
     
     /**
-     *
+     * Store the name of the species
      */
     public static final String SPECIES = "Vulpes vulpes";
 
@@ -34,7 +34,7 @@ public class Fox extends Animal {
      * Create a fox. A fox can be created as a new born (age zero and not
      * hungry) or with random age.
      *
-     * @param randomAge If true, the fox will have random age and hunger level.
+     * This will set the age and sex to be random
      */
     public Fox() {
         super(randomAge(MAX_AGE), randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -42,8 +42,8 @@ public class Fox extends Animal {
     }
 
     /**
-     *
-     * @param age
+     * This will set the sex to be random
+     * @param age the age with which the fox will be created
      */
     public Fox(int age) {
         super(age, randomSex(), MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -51,8 +51,8 @@ public class Fox extends Animal {
     }
 
     /**
-     *
-     * @param sex
+     * This will set the age to be random
+     * @param sex defines the sex of the fox
      */
     public Fox(Sex sex) {
         super(randomAge(MAX_AGE), sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -60,9 +60,9 @@ public class Fox extends Animal {
     }
 
     /**
-     *
-     * @param sex
-     * @param age
+     * Creates a fox with age and sex pre-defined
+     * @param sex defines the of the fox
+     * @param age defines the age with which the fox will be created
      */
     public Fox(Sex sex, int age) {
         super(age, sex, MAX_AGE, BREEDING_AGE, MAX_LITTER_SIZE, BREEDING_PROBABILITY, FOOD_VALUE, FULL_LEVEL);
@@ -70,14 +70,14 @@ public class Fox extends Animal {
     }
 
     /**
-     *
+     * Auxiliary function to the constructor
      */
     public void constructor() {
         setEdibleAnimals();
     }
 
     /**
-     *
+     * Defines what animals can be edible by the fox
      */
     @Override
     public void setEdibleAnimals() {
@@ -85,8 +85,8 @@ public class Fox extends Animal {
     }
 
     /**
-     *
-     * @return
+     * Creates a fox with age 0
+     * @return the new born fox
      */
     @Override
     public Animal newChild() {
@@ -96,9 +96,9 @@ public class Fox extends Animal {
     /**
      * This is what the fox does most of the time: it hunts for rabbits. In the
      * process, it might breed, die of hunger, or die of old age.
-     * @param currentField
-     * @param updatedField
-     * @param newAnimals
+     * @param currentField current field the fox are in
+     * @param updatedField the updated field that the fox will move to
+     * @param newAnimals a list of animals 
      */
     @Override
     public void toLive(Field currentField, Field updatedField, List newAnimals) {
@@ -114,7 +114,7 @@ public class Fox extends Animal {
 
     /**
      *
-     * @return
+     * @return The scientific name of the species
      */
     @Override
     public String getSpecies() {

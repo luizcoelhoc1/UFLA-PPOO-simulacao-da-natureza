@@ -2,7 +2,7 @@
 
 /**
  *
- * @author aluno
+ * @author Luiz Carlos, Gustavo Rodrigues, Gabriel Henrique
  */
 public class Principal {
 
@@ -13,8 +13,5 @@ public class Principal {
     public static void main(String[] args) {
         Simulator simulator = new Simulator();
         simulator.simulate();
-
-        
-        
     }
 }

@@ -24,8 +24,8 @@ public class Location {
 
     /**
      * Implement content equality.
-     * @param obj
-     * @return 
+     * @param obj Object to compare with
+     * @return True if equals, false if not
      */
     public boolean equals(Object obj) {
         if (obj instanceof Location) {
