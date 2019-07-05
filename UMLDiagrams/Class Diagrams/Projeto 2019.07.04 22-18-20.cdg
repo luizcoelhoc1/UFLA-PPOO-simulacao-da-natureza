@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Projeto">
+  <ClassDiagramComponents>
+    <Class name="Animal" package="" visibility="public" isAbstract="true" xPosition="460.0" yPosition="476.0">
+      <Fields>
+        <Field name="sex" type="Sex" visibility="private"/>
+        <Field name="age" type="int" visibility="private"/>
+        <Field name="alive" type="boolean" visibility="private"/>
+        <Field name="location" type="Location" visibility="private"/>
+        <Field name="maxAge" type="int" visibility="private"/>
+        <Field name="breedingAge" type="int" visibility="private"/>
+        <Field name="maxLitterSize" type="int" visibility="private"/>
+        <Field name="breedingProbability" type="double" visibility="private"/>
+        <Field name="foodValue" type="int" visibility="private"/>
+        <Field name="preys" type="ArrayList&lt;String&gt;" visibility="private"/>
+        <Field name="foodSatiety" type="int" visibility="private"/>
+        <Field name="rand" type="Random" visibility="private" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="age"/>
+          <Argument type="Sex" name="sex"/>
+          <Argument type="int" name="maxAge"/>
+          <Argument type="int" name="breedingAge"/>
+          <Argument type="int" name="maxLitterSize"/>
+          <Argument type="double" name="breedingProbability"/>
+          <Argument type="int" name="foodValue"/>
+          <Argument type="int" name="foodSatiety"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="incrementHunger" returnType="void" visibility="protected"/>
+        <Method name="incrementAge" returnType="void" visibility="private"/>
+        <Method name="addPrey" returnType="void" visibility="public">
+          <Argument type="String" name="prey"/>
+        </Method>
+        <Method name="isAlive" returnType="boolean" visibility="public"/>
+        <Method name="setLocation" returnType="void" visibility="public">
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="setLocation" returnType="void" visibility="public">
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="canBreed" returnType="boolean" visibility="private">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+        </Method>
+        <Method name="breed" returnType="List" visibility="private">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+        </Method>
+        <Method name="runTime" returnType="void" visibility="protected">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+          <Argument type="Location" name="newLocation"/>
+        </Method>
+        <Method name="toLive" returnType="void" visibility="public" isAbstract="true">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+        </Method>
+        <Method name="getSpecies" returnType="String" visibility="public" isAbstract="true"/>
+        <Method name="newChild" returnType="Animal" visibility="public" isAbstract="true"/>
+        <Method name="die" returnType="void" visibility="public"/>
+        <Method name="getLocation" returnType="Location" visibility="public"/>
+        <Method name="randomAge" returnType="int" visibility="public" isStatic="true">
+          <Argument type="int" name="maxAge"/>
+        </Method>
+        <Method name="randomSex" returnType="Sex" visibility="public" isStatic="true"/>
+        <Method name="getSex" returnType="Sex" visibility="public"/>
+        <Method name="getFoodValue" returnType="int" visibility="public"/>
+        <Method name="setEdibleAnimals" returnType="void" visibility="public" isAbstract="true"/>
+        <Method name="setEaten" returnType="void" visibility="public"/>
+        <Method name="findFood" returnType="Location" visibility="protected">
+          <Argument type="Field" name="field"/>
+          <Argument type="Location" name="location"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Counter" package="" visibility="public" xPosition="1893.0" yPosition="486.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="count" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="getCount" returnType="int" visibility="public"/>
+        <Method name="increment" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Coyote" package="" visibility="public" xPosition="1026.0" yPosition="1413.0">
+      <Fields>
+        <Field name="BREEDING_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="BREEDING_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_LITTER_SIZE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FULL_LEVEL" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FOOD_VALUE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="SPECIES" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="age"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+          <Argument type="int" name="age"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="constructor" returnType="void" visibility="public"/>
+        <Method name="setEdibleAnimals" returnType="void" visibility="public"/>
+        <Method name="newChild" returnType="Animal" visibility="public"/>
+        <Method name="toLive" returnType="void" visibility="public">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+        </Method>
+        <Method name="getSpecies" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Field" package="" visibility="public" xPosition="1425.0" yPosition="802.0">
+      <Fields>
+        <Field name="rand" type="Random" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="depth" type="int" visibility="private"/>
+        <Field name="field" type="Animal[][]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="depth"/>
+          <Argument type="int" name="width"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="clear" returnType="void" visibility="public"/>
+        <Method name="place" returnType="void" visibility="public">
+          <Argument type="Animal" name="animal"/>
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="place" returnType="void" visibility="public">
+          <Argument type="Animal" name="animal"/>
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="getObjectAt" returnType="Animal" visibility="public">
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="getObjectAt" returnType="Animal" visibility="public">
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Method>
+        <Method name="randomAdjacentLocation" returnType="Location" visibility="public">
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="freeAdjacentLocation" returnType="Location" visibility="public">
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="adjacentLocations" returnType="Iterator" visibility="public">
+          <Argument type="Location" name="location"/>
+        </Method>
+        <Method name="getDepth" returnType="int" visibility="public"/>
+        <Method name="getWidth" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="FieldStats" package="" visibility="public" xPosition="1826.0" yPosition="849.0">
+      <Fields>
+        <Field name="counters" type="HashMap" visibility="private"/>
+        <Field name="countsValid" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="getPopulationDetails" returnType="String" visibility="public">
+          <Argument type="Field" name="field"/>
+        </Method>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="incrementCount" returnType="void" visibility="public">
+          <Argument type="Class" name="animalClass"/>
+        </Method>
+        <Method name="countFinished" returnType="void" visibility="public"/>
+        <Method name="isViable" returnType="boolean" visibility="public">
+          <Argument type="Field" name="field"/>
+        </Method>
+        <Method name="generateCounts" returnType="void" visibility="private">
+          <Argument type="Field" name="field"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Fox" package="" visibility="public" xPosition="616.0" yPosition="1413.0">
+      <Fields>
+        <Field name="BREEDING_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="BREEDING_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_LITTER_SIZE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FULL_LEVEL" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FOOD_VALUE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="SPECIES" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="age"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+          <Argument type="int" name="age"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="constructor" returnType="void" visibility="public"/>
+        <Method name="setEdibleAnimals" returnType="void" visibility="public"/>
+        <Method name="newChild" returnType="Animal" visibility="public"/>
+        <Method name="toLive" returnType="void" visibility="public">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+        </Method>
+        <Method name="getSpecies" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Location" package="" visibility="public" xPosition="1495.0" yPosition="467.0">
+      <Fields>
+        <Field name="row" type="int" visibility="private"/>
+        <Field name="col" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="row"/>
+          <Argument type="int" name="col"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="getRow" returnType="int" visibility="public"/>
+        <Method name="getCol" returnType="int" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Principal" package="" visibility="public" xPosition="1939.0" yPosition="1913.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Rabbit" package="" visibility="public" xPosition="184.0" yPosition="1413.0">
+      <Fields>
+        <Field name="BREEDING_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_AGE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="BREEDING_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="MAX_LITTER_SIZE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FOOD_VALUE" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="SPECIES" type="String" visibility="public" isStatic="true" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="age"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+        </Constructor>
+        <Constructor visibility="public">
+          <Argument type="Sex" name="sex"/>
+          <Argument type="int" name="age"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="newChild" returnType="Animal" visibility="public"/>
+        <Method name="toLive" returnType="void" visibility="public">
+          <Argument type="Field" name="currentField"/>
+          <Argument type="Field" name="updatedField"/>
+          <Argument type="List" name="newAnimals"/>
+        </Method>
+        <Method name="getSpecies" returnType="String" visibility="public"/>
+        <Method name="setEdibleAnimals" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Simulator" package="" visibility="public" xPosition="1545.0" yPosition="1742.0">
+      <Fields>
+        <Field name="DEFAULT_WIDTH" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="DEFAULT_DEPTH" type="int" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="FOX_CREATION_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="RABBIT_CREATION_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="COYOTE_CREATION_PROBABILITY" type="double" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="animals" type="List" visibility="private"/>
+        <Field name="newAnimals" type="List" visibility="private"/>
+        <Field name="field" type="Field" visibility="private"/>
+        <Field name="updatedField" type="Field" visibility="private"/>
+        <Field name="step" type="int" visibility="private"/>
+        <Field name="view" type="SimulatorView" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="int" name="depth"/>
+          <Argument type="int" name="width"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="runLongSimulation" returnType="void" visibility="public"/>
+        <Method name="simulate" returnType="void" visibility="public">
+          <Argument type="int" name="numSteps"/>
+        </Method>
+        <Method name="simulate" returnType="void" visibility="public"/>
+        <Method name="simulateOneStep" returnType="void" visibility="public"/>
+        <Method name="reset" returnType="void" visibility="public"/>
+        <Method name="populate" returnType="void" visibility="private">
+          <Argument type="Field" name="field"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="SimulatorView" package="" visibility="public" xPosition="1765.0" yPosition="1222.0">
+      <Fields>
+        <Field name="EMPTY_COLOR" type="Color" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="UNKNOWN_COLOR" type="Color" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="STEP_PREFIX" type="String" visibility="private" isFinal="true"/>
+        <Field name="POPULATION_PREFIX" type="String" visibility="private" isFinal="true"/>
+        <Field name="btnPause" type="JButton" visibility="private"/>
+        <Field name="stepLabel" type="JLabel" visibility="private"/>
+        <Field name="fieldView" type="FieldView" visibility="private"/>
+        <Field name="colors" type="HashMap" visibility="private"/>
+        <Field name="stats" type="FieldStats" visibility="private"/>
+        <Field name="paused" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="height"/>
+          <Argument type="int" name="width"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="pausedSimulate" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="continueSimulate" returnType="void" visibility="private">
+          <Argument type="java.awt.event.ActionEvent" name="evt"/>
+        </Method>
+        <Method name="isPaused" returnType="boolean" visibility="public"/>
+        <Method name="setColor" returnType="void" visibility="public">
+          <Argument type="Class" name="animalClass"/>
+          <Argument type="Color" name="color"/>
+        </Method>
+        <Method name="getColor" returnType="Color" visibility="private">
+          <Argument type="Animal" name="animal"/>
+        </Method>
+        <Method name="showStatus" returnType="void" visibility="public">
+          <Argument type="int" name="step"/>
+          <Argument type="Field" name="field"/>
+        </Method>
+        <Method name="isViable" returnType="boolean" visibility="public">
+          <Argument type="Field" name="field"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Enum name="Sex" package="" visibility="public" xPosition="209.0" yPosition="654.0">
+      <Literals>
+        <Literal name="MASCULINO"/>
+        <Literal name="FEMININO"/>
+        <Literal name="HERMAFRODITA"/>
+      </Literals>
+    </Enum>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="sex" source="Animal" target="Sex" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="FieldStats" target="Counter" sourceCardinality="1..1" targetCardinality="0..*"/>
+    <UseRelation source="Animal" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="location" source="Animal" target="Location" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Coyote" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Rabbit" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="updatedField" source="Simulator" target="Field" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Fox" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Animal" target="Sex" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="SimulatorView" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Field" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Rabbit" target="Animal"/>
+    <UseRelation source="Animal" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Animal" target="Location" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="stats" source="SimulatorView" target="FieldStats" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Coyote" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="view" source="Simulator" target="SimulatorView" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="field" source="Simulator" target="Field" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="FieldStats" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Coyote" target="Animal"/>
+    <UseRelation source="Simulator" target="Field" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="SimulatorView" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Fox" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Rabbit" target="Animal" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="Field" target="Location" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation name="" source="Principal" target="Simulator" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="Fox" target="Animal"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
