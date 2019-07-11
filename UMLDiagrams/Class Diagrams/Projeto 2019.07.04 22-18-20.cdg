@@ -378,9 +378,9 @@
     </Class>
     <Enum name="Sex" package="" visibility="public" xPosition="209.0" yPosition="654.0">
       <Literals>
-        <Literal name="MASCULINO"/>
-        <Literal name="FEMININO"/>
-        <Literal name="HERMAFRODITA"/>
+        <Literal name="MALE"/>
+        <Literal name="FEMALE"/>
+        <Literal name="HERMAPHRODITE"/>
       </Literals>
     </Enum>
   </ClassDiagramComponents>
